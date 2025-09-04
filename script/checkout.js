@@ -12,7 +12,7 @@ import { deliveryOptions } from '../data/deliveryOptions.js'
 
 
 
-
+function renderOrderSummary(){
 
 let cartSummaryHTML = '';
 cart.forEach((cartItem) => {
@@ -157,6 +157,9 @@ document.querySelectorAll('.js-delivery-option').forEach((element) =>{
 
     const {productId, deliveryOptionId} = element.dataset
     updateDeliveryOption(productId, deliveryOptionId)
+    renderOrderSummary()
 
   })
 })
+};
+renderOrderSummary()
