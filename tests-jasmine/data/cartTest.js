@@ -4,19 +4,31 @@ import {addToCart, cart,  loadfromStorage
 describe('test suite: Add To Cart', ()=>{
 
   it('add an existing product to the cart',()=>{
-    spyOn(localStorage, 'getItem').and.callFake(()=>{
-      return JSON.stringify([{
-        productId: 'b86ddc8b-3501-4b17-9889-a3bad6fb585f',
-    quantity: 1,
-    deliveryOptionId: '1'
+     spyOn(localStorage, 'setItem')
+    
+     spyOn(localStorage, 'getItem').and.callFake(()=>{
+       return JSON.stringify([{
+         productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
+     quantity: 1,
+     deliveryOptionId: '1'
 
-      }])
-    })
-    loadfromStorage();
-     addToCart('b86ddc8b-3501-4b17-9889-a3bad6fb585f');
-    expect(cart.length).toEqual(3);
-    expect(cart[2].productId).toEqual('b86ddc8b-3501-4b17-9889-a3bad6fb585f');
-    expect(cart[0].quantity).toEqual(1)
+       }])
+     })
+     loadfromStorage();
+
+
+      addToCart('e43638ce-6aa0-4b85-b27f-e1d07eb678c6');
+
+    expect(cart.length).toEqual(1);
+    expect(localStorage.setItem).toHaveBeenCalledTimes(1)
+
+     expect(cart[0].productId).toEqual('e43638ce-6aa0-4b85-b27f-e1d07eb678c6');
+    
+     expect(cart[0].quantity).toEqual(2)
+
+
+
+     
 
     
 
@@ -28,9 +40,13 @@ describe('test suite: Add To Cart', ()=>{
 
 
   it('adds a new product to the cart', ()=>{
+    spyOn(localStorage, 'setItem');
+
     spyOn(localStorage, 'getItem').and.callFake(()=>{
-      return JSON.stringify([])
+      return JSON.stringify([]);
     });
+
+  
 
 
 
@@ -39,10 +55,14 @@ describe('test suite: Add To Cart', ()=>{
      
 
 
-    addToCart('b86ddc8b-3501-4b17-9889-a3bad6fb585f');
-    expect(cart.length).toEqual(3);
-    expect(cart[2].productId).toEqual('b86ddc8b-3501-4b17-9889-a3bad6fb585f');
-    expect(cart[0].quantity).toEqual(1)
+    addToCart('e43638ce-6aa0-4b85-b27f-e1d07eb678c6');
+
+    expect(cart.length).toEqual(1);
+    expect(localStorage.setItem).toHaveBeenCalledTimes(1)
+
+     expect(cart[0].productId).toEqual('e43638ce-6aa0-4b85-b27f-e1d07eb678c6');
+    
+     expect(cart[0].quantity).toEqual(1)
 
   });
 
