@@ -57,6 +57,12 @@ export function addToCart(productId){
     
 };
 
+   export function  getCartLength(cart) {
+        return cart.length;
+    }
+
+
+
 
 
 
