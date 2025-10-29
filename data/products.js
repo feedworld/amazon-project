@@ -40,22 +40,22 @@ class Product {
     return `$${formatCurrency(this.priceCents)}`
   };
 
- extraInfoHTML(){
-  return '';
- }
+  extraInfoHTML() {
+    return '';
+  }
 
 }
 class Clothing extends Product {
   sizeChartLink;
 
-  constructor(productDetails){
+  constructor(productDetails) {
     super(productDetails);
     this.sizeChartLink = productDetails.sizeChartLink;
 
   }
 
-  extraInfoHTML(){
-    return`
+  extraInfoHTML() {
+    return `
     <a href="${this.sizeChartLink}" target="_blank"> Size Chart</a>
     `
   }
@@ -105,7 +105,29 @@ const product1 = new Product({
   ]
 });
 
+export let products = [];
 
+export function loadProducts(fun) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener('load', () => {
+    products = JSON.parse(xhr.response).map((productDetails) => {
+      if (productDetails.type === 'clothing') {
+        return new Clothing(productDetails)
+      }
+      return new Product(productDetails)
+    });
+    console.log('loaded products')
+    fun()
+
+
+  });
+
+  xhr.open('GET', 'https://supersimplebackend.dev/products');
+  xhr.send();
+};
+
+/*
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -772,3 +794,4 @@ export const products = [
   return new Product(productDetails)
 })
 
+*/
