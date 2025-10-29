@@ -85,7 +85,9 @@ console.log(tshirt);
 console.log(tshirt.getPrice())
 
 
-
+// const date = new Date()
+// console.log(date);
+// console.log(date.toLocaleTimeString())
 
 const product1 = new Product({
   id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -101,7 +103,7 @@ const product1 = new Product({
     "sports",
     "apparel"
   ]
-})
+});
 
 
 export const products = [
