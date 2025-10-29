@@ -1,10 +1,19 @@
 import { renderOrderSummary } from '../../script/checkout/ordersummary.js';
 import { loadfromStorage, cart } from '../../data/cart.js';
+import { loadProducts } from '../../data/products.js';
 
 
 describe('test suite: renderOrderSummary', () => {
-       const productId1 = '83d4ca15-0f35-48f5-b7a3-1ea210004f2e';
-        const productId2 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6';
+    const productId1 = '83d4ca15-0f35-48f5-b7a3-1ea210004f2e';
+    const productId2 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6';
+
+
+    beforeAll((done) => {
+        loadProducts(()=>{
+            done()
+        })
+        
+    });
 
 
     beforeEach(() => {
@@ -15,7 +24,7 @@ describe('test suite: renderOrderSummary', () => {
         <div class="js-summary-payment"></div>
 
         `
-     
+
 
         spyOn(localStorage, 'getItem').and.callFake(() => {
             return JSON.stringify([{
