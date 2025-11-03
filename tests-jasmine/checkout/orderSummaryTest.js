@@ -1,6 +1,6 @@
 import { renderOrderSummary } from '../../script/checkout/ordersummary.js';
 import { loadfromStorage, cart } from '../../data/cart.js';
-import { loadProducts } from '../../data/products.js';
+import { loadProductsFetch, loadProducts } from '../../data/products.js';
 
 
 describe('test suite: renderOrderSummary', () => {
@@ -9,7 +9,7 @@ describe('test suite: renderOrderSummary', () => {
 
 
     beforeAll((done) => {
-        loadProducts(()=>{
+        loadProductsFetch().then(()=>{
             done()
         })
         
